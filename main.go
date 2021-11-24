@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/jfrog/jfrog-cli-core/v2/plugins"
 	"github.com/jfrog/jfrog-cli-core/v2/plugins/components"
-	"github.com/jfrog/jfrog-cli-plugin-template/commands"
+	"github.com/sveder/jfrog-cli-autosetup/commands"
 )
 
 func main() {
@@ -12,14 +12,14 @@ func main() {
 
 func getApp() components.App {
 	app := components.App{}
-	app.Name = "hello-frog"
-	app.Description = "Easily greet anyone."
-	app.Version = "v0.1.0"
+	app.Name = "autosetup"
+	app.Description = "Easily and automatically setup your machine to work with a remote Artifactory repo."
+	app.Version = "v1.0.0"
 	app.Commands = getCommands()
 	return app
 }
 
 func getCommands() []components.Command {
 	return []components.Command{
-		commands.GetHelloCommand()}
+		commands.GetAutosetupCommand()}
 }

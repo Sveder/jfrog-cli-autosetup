@@ -1,43 +1,41 @@
-# hello-frog
+# Autosetup Repository Command Line Plugin 
 
 ## About this plugin
-This plugin is a template and a functioning example for a basic JFrog CLI plugin. 
-This README shows the expected structure of your plugin's README.
+This plugin automatically sets up your local machine to work with your chosen remote
+artifactory repositories. For example, if you have a remote Artifactory repository
+of type Pypi (Python libraries repo) this plugin will configure `pip` to be able to
+work with it. 
 
 ## Installation with JFrog CLI
 Installing the latest version:
 
-`$ jfrog plugin install hello-frog`
+`$ jfrog plugin install autosetup`
 
 Installing a specific version:
 
-`$ jfrog plugin install hello-frog@version`
+`$ jfrog plugin install autosetup`
 
 Uninstalling a plugin
 
-`$ jfrog plugin uninstall hello-frog`
+`$ jfrog plugin uninstall autosteup`
 
 ## Usage
 ### Commands
-* hello
+* autosetup
     - Arguments:
-        - addressee - The name of the person you would like to greet.
-    - Flags:
-        - shout: Makes output uppercase **[Default: false]**
-        - repeat: Greets multiple times **[Default: 1]**
+        - repo - The name of the Artifactory repo you want to configure.
     - Example:
     ```
-  $ jfrog hello-frog hello world --shout --repeat=2
-  
-  NEW GREETING: HELLO WORLD!
-  NEW GREETING: HELLO WORLD!
+  $ jfrog autosetup <repo_name>
+  Executing setup step...
+  Local machine set up to work with <repo_name>
   ```
 
-### Environment variables
-* HELLO_FROG_GREET_PREFIX - Adds a prefix to every greet **[Default: New greeting: ]**
-
 ## Additional info
-None.
+Currently supported repository types:
+* docker
+* Pypi
+
 
 ## Release Notes
 The release notes are available [here](RELEASE.md).
