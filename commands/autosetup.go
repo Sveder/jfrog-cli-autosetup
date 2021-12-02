@@ -55,13 +55,12 @@ func autosetupCmd(c *components.Context) error {
 		},
 		args...,
 	)
-	log.Output(args)
 
 	//out, err := exec.Command("python3", args...).Output()
 	out, err := exec.Command("python", args...).Output()
 	if err != nil {
-		log.Output(err)
-		log.Output(out)
+		log.Output(fmt.Sprintf("%s", out))
+		log.Output(fmt.Sprintf("%s", err))
 		return nil
 	}
 

@@ -46,12 +46,31 @@ class PythonHandler(BaseHandler):
         cp = configparser.ConfigParser()
         cp.read(pip_conf_path)
 
-        url = f'https://{self.username}:{self.password}@' \
-              f'{self.base_api_without_schema}artifactory/api/pypi/{repo_name}/simple'
-        cp['global'] = {'index-url': url}
+        url = self._get_pypi_repo_url(repo_name)
+        config = {'extra-index-url': url}
+
+
+        if 'global' in cp.sections() and 'index_url' not in cp['global']:
+            config.update({'index-url': 'https://pypi.org/simple'})
+
+        cp['global'] = config
 
         with pip_conf_path.open('w+') as writable_pip_conf:
             cp.write(writable_pip_conf)
 
         print('Python resolve setup finished successfully. To download a package run:')
         print(f'pip install <package_name>')
+
+    def teardown(self, repo_name):
+        pip_conf_path = pathlib.Path.home() / pathlib.Path('.pip') / pathlib.Path('pip.conf')
+        if pip_conf_path.exists():
+            pip_conf_path.unlink()
+
+        pypirc_path = pathlib.Path.home() / pathlib.Path('.pypirc')
+        if pypirc_path.exists():
+            pypirc_path.unlink()
+
+
+    def _get_pypi_repo_url(self, repo_name):
+        return f'https://{self.username}:{self.password}@' \
+               f'{self.base_api_without_schema}artifactory/api/pypi/{repo_name}/simple'

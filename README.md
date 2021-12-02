@@ -25,16 +25,28 @@ Uninstalling a plugin
     - Arguments:
         - repo - The name of the Artifactory repo you want to configure.
     - Example:
-    ```
+  ```
   $ jfrog autosetup <repo_name>
   Executing setup step...
   Local machine set up to work with <repo_name>
   ```
+* teardown
+    - Arguments:
+        - repo - The name of the Artifactory repo you want to remove configuration.
+    - Example:
+  ```
+  $ jfrog teardown <repo_name>
+  Executing teardown step...
+  Local machine no longer set up to work with <repo_name>
+  ```
+
 
 ## Additional info
-Currently supported repository types:
+Currently, supported repository types:
 * docker
 * Pypi
+* npm
+* yum/rpm
 
 
 ## Release Notes

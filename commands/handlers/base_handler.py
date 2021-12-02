@@ -12,3 +12,6 @@ class BaseHandler:
         print(f'Setting up {self.type}')
         self.setup_deploy(repo_name)
         self.setup_resolve(repo_name)
+
+    def teardown(self, repo_name):
+        raise NotImplementedError('Not yet implemented.')

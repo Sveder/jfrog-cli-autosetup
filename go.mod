@@ -1,4 +1,4 @@
-module github.com/jfrog/jfrog-cli-plugin-template
+module github.com/sveder/jfrog-cli-autosetup
 
 go 1.14
 
