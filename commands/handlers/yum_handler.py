@@ -13,10 +13,7 @@ gpgcheck=0
 class YumHandler(BaseHandler):
     type='yum/rpm'
 
-    def setup_deploy(self, repo_name):
-        pass
-
-    def setup_resolve(self, repo_name):
+    def autosetup(self, repo_name):
         config_path = pathlib.Path('/etc/yum.repos.d/artifactory.repo')
         if not config_path.parent.exists():
             config_path.parent.mkdir(parents=True)

@@ -9,6 +9,8 @@ import (
 	clientutils "github.com/jfrog/jfrog-client-go/utils"
 	"github.com/jfrog/jfrog-client-go/utils/log"
 
+	"strings"
+
 	"os/exec"
 )
 
@@ -20,10 +22,22 @@ func GetAutosetupCommand() components.Command {
 		Description: "Automatically setup your machine to work with a remote Artifactory repo.",
 		Flags:       getFlags(),
 		Action: func(c *components.Context) error {
-			return autosetupCmd(c)
+			return command(c, "autosetup")
 		},
 	}
 }
+
+func GetTeardownCommand() components.Command {
+	return components.Command{
+		Name:        "teardown",
+		Description: "Automatically remove your configured connection to the remote Artifactory repo.",
+		Flags:       getFlags(),
+		Action: func(c *components.Context) error {
+			return command(c, "teardown")
+		},
+	}
+}
+
 
 func getFlags() []components.Flag {
 	return []components.Flag{
@@ -34,7 +48,8 @@ func getFlags() []components.Flag {
 	}
 }
 
-func autosetupCmd(c *components.Context) error {
+
+func command(c *components.Context, subcommand string) error {
 	var args = c.Arguments
 
 	details, err := getRtDetails(c)
@@ -45,7 +60,7 @@ func autosetupCmd(c *components.Context) error {
 	args = append(
 		[]string{
 			"commands/autosetup.py",
-			"autosetup",
+			subcommand,
 			"--username",
 			details.User,
 			"--password",
@@ -56,11 +71,16 @@ func autosetupCmd(c *components.Context) error {
 		args...,
 	)
 
-	//out, err := exec.Command("python3", args...).Output()
 	out, err := exec.Command("python", args...).Output()
 	if err != nil {
-		log.Output(fmt.Sprintf("%s", out))
-		log.Output(fmt.Sprintf("%s", err))
+		log.Output("out->", fmt.Sprintf("%s", out))
+		log.Output("err->", fmt.Sprintf("%s", err))
+
+		if strings.Contains(fmt.Sprint(err), "executable file not found in") {
+			print("Python must be installed to use Python plugins. Please install Python 3 with your operating " +
+				   "system's package manager. See https://www.python.org/downloads/")
+			return nil
+		}
 		return nil
 	}
 

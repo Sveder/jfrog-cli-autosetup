@@ -6,11 +6,7 @@ from handlers.base_handler import BaseHandler
 class DockerHandler(BaseHandler):
     type='docker'
 
-    def setup_deploy(self, repo_name):
-        pass
-
-
-    def setup_resolve(self, repo_name):
+    def autosetup(self, repo_name):
         res = subprocess.run(
             f'docker login -u {self.username} -p {self.password} {self.base_api_without_schema}',
             stdout=subprocess.PIPE,

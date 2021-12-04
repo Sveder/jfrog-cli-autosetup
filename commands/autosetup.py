@@ -5,7 +5,8 @@ from handlers.python_handler import PythonHandler
 from handlers.docker_handler import DockerHandler
 from handlers.npm_handler import NpmHandler
 from handlers.yum_handler import YumHandler
-
+from handlers.nuget_handler import NugetHandler
+from handlers.conan_handler import ConanHandler
 
 
 repo_type_to_handler = {
@@ -13,6 +14,8 @@ repo_type_to_handler = {
     'docker': DockerHandler,
     'npm': NpmHandler,
     'rpm': YumHandler,
+    'nuget': NugetHandler,
+    'conan': ConanHandler,
 }
 
 

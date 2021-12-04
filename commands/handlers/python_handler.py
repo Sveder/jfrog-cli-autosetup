@@ -7,6 +7,10 @@ from handlers.base_handler import BaseHandler
 class PythonHandler(BaseHandler):
     type='pypi'
 
+    def autosetup(self, repo_name):
+        self.setup_deploy(repo_name)
+        self.setup_resolve(repo_name)
+
     def setup_deploy(self, repo_name):
         pypirc_path = pathlib.Path.home() / pathlib.Path('.pypirc')
 

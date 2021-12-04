@@ -9,9 +9,7 @@ class BaseHandler:
         self.password = password
 
     def autosetup(self, repo_name):
-        print(f'Setting up {self.type}')
-        self.setup_deploy(repo_name)
-        self.setup_resolve(repo_name)
+        raise NotImplementedError('Not yet implemented.')
 
     def teardown(self, repo_name):
         raise NotImplementedError('Not yet implemented.')
