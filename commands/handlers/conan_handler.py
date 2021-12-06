@@ -2,7 +2,7 @@ from handlers.base_handler import BaseHandler
 
 
 class ConanHandler(BaseHandler):
-    type='conan'
+    type = 'conan'
 
     def autosetup(self, repo_name):
         command = f'conan remote add artifactory-{repo_name} ' \
@@ -22,7 +22,6 @@ class ConanHandler(BaseHandler):
         print(f'conan upload <RECIPE> -r artifactory-{repo_name} --all')
         print('To install the dependencies defined in your project\'s conanfile.txt')
         print(f'conan install . -r artifactory-{repo_name}')
-
 
     def teardown(self, repo_name):
         command = f'conan remote remove artifactory-{repo_name}'

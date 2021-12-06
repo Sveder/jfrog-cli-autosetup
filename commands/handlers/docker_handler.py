@@ -2,11 +2,11 @@ from handlers.base_handler import BaseHandler
 
 
 class DockerHandler(BaseHandler):
-    type='docker'
+    type = 'docker'
 
     def autosetup(self, repo_name):
-        command =  f'docker login -u {self.username} -p {self.password} ' \
-                   f'{self.base_api_without_schema}'
+        command = f'docker login -u {self.username} -p {self.password} ' \
+                  f'{self.base_api_without_schema}'
 
         _, error = self.run_subprocess(command)
         if error:

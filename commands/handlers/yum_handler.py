@@ -3,6 +3,7 @@ from urllib.parse import quote_plus
 
 from handlers.base_handler import BaseHandler
 
+
 REPO_CONFIG_TEMPLATE = """[Artifactory]
 name=Artifactory
 baseurl=https://%s:%s@%sartifactory/yum_test/
@@ -10,8 +11,9 @@ enabled=1
 gpgcheck=0
 """
 
+
 class YumHandler(BaseHandler):
-    type='yum/rpm'
+    type = 'yum/rpm'
 
     def autosetup(self, repo_name):
         config_path = pathlib.Path('/etc/yum.repos.d/artifactory.repo')
@@ -30,7 +32,6 @@ class YumHandler(BaseHandler):
 
         print('Yum setup finished successfully. To install a package, run:')
         print('yum install <PACKAGE>')
-
 
     def teardown(self, repo_name):
         config_path = pathlib.Path('/etc/yum.repos.d/artifactory.repo')

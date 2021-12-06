@@ -4,7 +4,7 @@ from handlers.base_handler import BaseHandler
 
 
 class GemsHandler(BaseHandler):
-    type='gems'
+    type = 'gems'
 
     def autosetup(self, repo_name):
         encoded_username = quote_plus(self.username)
@@ -21,7 +21,6 @@ class GemsHandler(BaseHandler):
         print(f'gem push <PACKAGE> --host {repo_url}')
         print('To resolve a package, run the following command:')
         print(f'gem install <PACKAGE> --source {repo_url}')
-
 
     def teardown(self, repo_name):
         encoded_username = quote_plus(self.username)

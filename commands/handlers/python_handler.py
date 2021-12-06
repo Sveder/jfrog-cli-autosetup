@@ -5,7 +5,7 @@ from handlers.base_handler import BaseHandler
 
 
 class PythonHandler(BaseHandler):
-    type='pypi'
+    type = 'pypi'
 
     def autosetup(self, repo_name):
         self.setup_deploy(repo_name)
@@ -53,7 +53,6 @@ class PythonHandler(BaseHandler):
         url = self._get_pypi_repo_url(repo_name)
         config = {'extra-index-url': url}
 
-
         if 'global' in cp.sections() and 'index_url' not in cp['global']:
             config.update({'index-url': 'https://pypi.org/simple'})
 
@@ -75,7 +74,6 @@ class PythonHandler(BaseHandler):
             pypirc_path.unlink()
 
         print('Disconnected pip from the artifactory repo.')
-
 
     def _get_pypi_repo_url(self, repo_name):
         return f'https://{self.username}:{self.password}@' \

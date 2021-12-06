@@ -2,7 +2,7 @@ from handlers.base_handler import BaseHandler
 
 
 class NugetHandler(BaseHandler):
-    type='nuget'
+    type = 'nuget'
 
     def autosetup(self, repo_name):
         command = f'nuget sources Add -Name Artifactory-{repo_name} ' \
@@ -18,7 +18,6 @@ class NugetHandler(BaseHandler):
         print(f'nuget push <PACKAGE_NAME> -Source Artifactory-{repo_name}')
         print('To resolve a package using the NuGet CLI, run the following command:')
         print(f'nuget install <PACKAGE_NAME> -Source Artifactory-{repo_name}')
-
 
     def teardown(self, repo_name):
         command = f'nuget sources Remove -Name Artifactory-{repo_name}'
