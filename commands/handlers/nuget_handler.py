@@ -1,6 +1,3 @@
-import subprocess
-
-
 from handlers.base_handler import BaseHandler
 
 
@@ -12,13 +9,9 @@ class NugetHandler(BaseHandler):
                   f'-Source {self.base_api}artifactory/api/nuget/{repo_name} ' \
                   f'-username {self.username} -password {self.password}'
 
-        res = subprocess.run(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True,
-            check=True,
-        )
+        _, error = self.run_subprocess(command)
+        if error:
+            return
 
         print('Nuget successfully set up. Deploying to this repository can be done by running the '
               'following command:')
@@ -30,12 +23,8 @@ class NugetHandler(BaseHandler):
     def teardown(self, repo_name):
         command = f'nuget sources Remove -Name Artifactory-{repo_name}'
 
-        res = subprocess.run(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            shell=True,
-            check=True,
-        )
+        _, error = self.run_subprocess(command)
+        if error:
+            return
 
         print('Disconnected nuget from the artifactory repo.')

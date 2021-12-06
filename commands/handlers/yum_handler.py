@@ -28,6 +28,9 @@ class YumHandler(BaseHandler):
             print('To autosetup a yum/rpm repository you must run the autosetup command '
                   'as root (for example, using sudo).')
 
+        print('Yum setup finished successfully. To install a package, run:')
+        print('yum install <PACKAGE>')
+
 
     def teardown(self, repo_name):
         config_path = pathlib.Path('/etc/yum.repos.d/artifactory.repo')
@@ -37,3 +40,5 @@ class YumHandler(BaseHandler):
         except PermissionError:
             print('To teardown a yum/rpm repository you must run the teardown command '
                   'as root (for example, using sudo).')
+
+        print('Disconnected yum from the artifactory repo.')

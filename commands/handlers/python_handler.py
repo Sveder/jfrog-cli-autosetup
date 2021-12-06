@@ -63,7 +63,7 @@ class PythonHandler(BaseHandler):
             cp.write(writable_pip_conf)
 
         print('Python resolve setup finished successfully. To download a package run:')
-        print(f'pip install <package_name>')
+        print('pip install <package_name>')
 
     def teardown(self, repo_name):
         pip_conf_path = pathlib.Path.home() / pathlib.Path('.pip') / pathlib.Path('pip.conf')
@@ -73,6 +73,8 @@ class PythonHandler(BaseHandler):
         pypirc_path = pathlib.Path.home() / pathlib.Path('.pypirc')
         if pypirc_path.exists():
             pypirc_path.unlink()
+
+        print('Disconnected pip from the artifactory repo.')
 
 
     def _get_pypi_repo_url(self, repo_name):
