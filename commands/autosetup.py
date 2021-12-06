@@ -7,6 +7,7 @@ from handlers.npm_handler import NpmHandler
 from handlers.yum_handler import YumHandler
 from handlers.nuget_handler import NugetHandler
 from handlers.conan_handler import ConanHandler
+from handlers.gems_handler import GemsHandler
 
 
 repo_type_to_handler = {
@@ -16,6 +17,7 @@ repo_type_to_handler = {
     'rpm': YumHandler,
     'nuget': NugetHandler,
     'conan': ConanHandler,
+    'gems': GemsHandler,
 }
 
 

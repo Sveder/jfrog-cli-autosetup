@@ -1,6 +1,4 @@
-import pathlib
 import subprocess
-
 
 from handlers.base_handler import BaseHandler
 
