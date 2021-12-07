@@ -19,7 +19,8 @@ const ServerIdFlag = "server-id"
 func GetAutosetupCommand() components.Command {
 	return components.Command{
 		Name:        "autosetup",
-		Description: "Automatically setup your machine to work with a remote Artifactory repo.",
+        Aliases:     []string{"as"},
+		Description: "Automatically setup your local package manager to work with a remote Artifactory repo.",
 		Flags:       getFlags(),
 		Action: func(c *components.Context) error {
 			return command(c, "autosetup")
@@ -30,7 +31,8 @@ func GetAutosetupCommand() components.Command {
 func GetTeardownCommand() components.Command {
 	return components.Command{
 		Name:        "teardown",
-		Description: "Automatically remove your configured connection to the remote Artifactory repo.",
+		Aliases:     []string{"td"},
+		Description: "Automatically remove local package manager connection to remote Artifactory repo.",
 		Flags:       getFlags(),
 		Action: func(c *components.Context) error {
 			return command(c, "teardown")
@@ -71,10 +73,12 @@ func command(c *components.Context, subcommand string) error {
 		args...,
 	)
 
-	out, err := exec.Command("python", args...).Output()
+	out, err := exec.Command("python", args...).CombinedOutput()
+
 	if err != nil {
-		log.Output("out->", fmt.Sprintf("%s", out))
-		log.Output("err->", fmt.Sprintf("%s", err))
+		log.Output("Failed to run the Python autosetup script. Stdout/stderr:")
+		log.Output(fmt.Sprintf("%s", out))
+		log.Output(fmt.Sprintf("%s", err))
 
 		if strings.Contains(fmt.Sprint(err), "executable file not found in") {
 			print("Python must be installed to use Python plugins. Please install Python 3 with your operating " +

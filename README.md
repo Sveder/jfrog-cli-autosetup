@@ -1,9 +1,10 @@
 # Autosetup Repository Command Line Plugin 
 
 ## About this plugin
-This plugin automatically sets up your local machine to work with your chosen remote
-artifactory repositories. For example, if you have a remote Artifactory repository
-of type Pypi (Python libraries repo) this plugin will configure `pip` to be able to
+This plugin automatically sets up your local machine's package manager to 
+work with your chosen remote artifactory repository.
+For example, if you have a remote Artifactory repository
+of type Pypi (Python package repo) this plugin will configure `pip` to be able to
 work with it. 
 
 ## Installation with JFrog CLI
@@ -18,6 +19,14 @@ Installing a specific version:
 Uninstalling a plugin
 
 `$ jfrog plugin uninstall autosteup`
+
+Caveats for running python plugins:
+1. The commands/handlers directory needs to be added to python path, most easily done with 
+.pth file: https://docs.python.org/2/library/site.html
+   
+2. The commands/autosetup.py file (and directory) must be copied to the directory from which
+you plan to use jfrog from.
+   
 
 ## Usage
 ### Commands
@@ -47,6 +56,10 @@ Currently, supported repository types:
 * Pypi
 * npm
 * yum/rpm
+* gems
+* debian
+* nuget
+* conan
 
 
 ## Release Notes

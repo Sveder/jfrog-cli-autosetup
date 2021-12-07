@@ -13,7 +13,7 @@ func main() {
 func getApp() components.App {
 	app := components.App{}
 	app.Name = "autosetup"
-	app.Description = "Easily and automatically setup and teardown your machine to work with a remote Artifactory repo."
+	app.Description = "Easily and automatically setup and teardown local package managers to work with remote Artifactory repos."
 	app.Version = "v1.0.0"
 	app.Commands = getCommands()
 	return app
