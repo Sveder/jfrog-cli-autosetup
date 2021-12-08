@@ -8,8 +8,9 @@ NPMRC_TEMPLATE = """_auth = %s
 email = %s
 always-auth = true"""
 
+
 class NpmHandler(BaseHandler):
-    type='npm'
+    type = 'npm'
 
     def autosetup(self, repo_name):
         url = f'{self.base_api}artifactory/api/npm/npm_test/'
